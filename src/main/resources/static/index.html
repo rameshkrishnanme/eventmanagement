@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		
+		<link rel="stylesheet" href="css/bootstrap-theme.css" />
+		<link rel="stylesheet" href="css/bootstrap.css" />
+
+
+		<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" />
+		<title>Welcome to Event Management Application</title>
+
+	</head>
+	<body ng-app="app">
+		<div class="container" ng-controller="appController">
+			<div class="page-header">
+				<h1>Welcome to Event Management Application</h1>
+			</div>
+
+			<nav class="navbar navbar-default {{active}}" ng-click="$event.preventDefault()">
+				<div class="container-fluid">
+					<div class="navbar-header">
+						<a class="navbar-brand" href="#">Event Mgmt # </a>
+					</div>
+					<ul class="nav navbar-nav">
+						<li ng-class="{active: selected=='home'}">
+							<a href="#" ng-click="menu('home')">Home</a>
+						</li>
+						<li ng-class="{active: selected=='listemp'}">
+							<a href="#" ng-click="menu('listemp')">List Employees</a>
+						</li>
+						<li ng-class="{active: selected=='listevt'}">
+							<a href="#" ng-click="menu('listevt')">List Event</a>
+						</li>
+						<li ng-class="{active: selected=='newevt'}">
+							<a href="#" ng-click="menu('newevt')">New Event Registration</a>
+						</li>
+						<li ng-class="{active: selected=='evtreg'}">
+							<a href="#" ng-click="menu('evtreg')">Event Registration</a>
+						</li>
+					</ul>
+				</div>
+			</nav>
+			<div ng-show="selected=='home'" class="container">
+				<h1>Time to make your event planning and management easier.</h1>
+				this application powers ticketing and registration for millions of events each year. Join hundreds of thousands of event organisers on our platform today.
+				It makes it fun and easy for everyone to collaborate, focus on what's important, and get more done at work. It's the first visual tool of its kind and shows you exactly where things stand at a single glance. Finally get rid of painfully long email threads, cut down on meetings, and experience the satisfaction of turning things green when they're done
+			</p>
+			</div>
+			<p ng-show="selected=='listemp'">
+				<div ng-show="selected=='listemp' && employees">
+					<table border="1" class="table table-striped">
+						<tr>
+							<th>MID</th>
+							<th>Name</th>
+							<th>Join Date</th>
+							<th>Email</th>
+						</tr>
+						<tr ng-repeat="emp in employees">
+							<td>{{emp.mid}}</td>
+							<td>{{emp.name}}</td>
+							<td>{{emp.joinDate}}</td>
+							<td>{{emp.email}}</td>
+						</tr>
+					</table>
+			    </div>			
+			</p>
+			<p ng-show="selected=='listevt'">
+				<div ng-show="selected=='listevt' && events">
+					<table border="1" class="table table-striped">
+						<tr>
+							<th>Event Title</th>
+							<th>Event Description</th>
+						</tr>
+						<tr ng-repeat="evt in events">
+							<td>{{evt.eventTitle}}</td>
+							<td>{{evt.eventDesc}}</td>
+						</tr>
+					</table>
+			    </div>			
+			</p>
+			<p ng-show="selected=='newevt'">
+				<div ng-show="selected=='newevt'">
+					<table border="1" class="table table-striped">
+						<tr>
+							<td>Select Event</td>
+							<td>
+								 <select name="eventSelect" ng-model="eventSelect">
+									<option ng-repeat="evt in events" value="{{evt.eventId}}">{{evt.eventTitle}}</option>
+			 					</select>
+							</td>
+						</tr>
+						<tr>
+							<td>Select Employee</td>
+							<td>
+								<select name="empSelect" ng-model="empSelect">
+									<option ng-repeat="emp in employees" value="{{emp.id}}">{{emp.mid}}-{{emp.name}}</option>
+			 					</select>
+							</td>
+						</tr>
+					</table>
+					<button ng-click="register()">Register</button>
+					<h3 style="color:{{messagecolor}}">{{message}}</h3>
+			    </div>		
+			</p>
+			<p ng-show="selected=='evtreg'">
+				Events :
+				<select name="eventSelect" ng-model="eventSelectReg" ng-change="registedEmpl()">
+					<option ng-repeat="evt in events" value="{{evt.eventId}}">{{evt.eventTitle}}</option>
+			 	</select>
+			
+				<div ng-show="selected=='evtreg' && employeesRegistered.length > 0">
+					<table border="1" class="table table-striped">
+						<tr>
+							<th>MID</th>
+							<th>Name</th>
+							<th>Join Date</th>
+							<th>Email</th>
+						</tr>
+						<tr ng-repeat="emp in employeesRegistered">
+							<td>{{emp.mid}}</td>
+							<td>{{emp.name}}</td>
+							<td>{{emp.joinDate}}</td>
+							<td>{{emp.email}}</td>
+						</tr>
+					</table>
+			    </div>			
+			</p>
+		</div>
+		
+		<script src="js/angular.min.js"></script>
+		<script src="js/application.js"></script>
+		
+	</body>
+</html>
