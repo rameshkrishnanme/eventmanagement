@@ -27,8 +27,8 @@
 		<property name="hibernate.hbm2ddl.import_files">initial_data.sql</property>
 		<property name="hibernate.search.autoregister_listeners">false</property>
 		<property name="hibernate.validator.apply_to_ddl">false</property>
-		<mapping class="com.mindtree.app.entity.Event" />
-		<mapping class="com.mindtree.app.entity.EventRegistration" />
-		<mapping class="com.mindtree.app.entity.Employee" />
+		<mapping class="com.blacksystems.app.entity.Event" />
+		<mapping class="com.blacksystems.app.entity.EventRegistration" />
+		<mapping class="com.blacksystems.app.entity.Employee" />
 	</session-factory>
 </hibernate-configuration>
